@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <%- include('partials/head') %>
+</head>
+<body class="bg-[#f7f9fc] text-slate-900 min-h-screen flex flex-col justify-center items-center p-4">
+
+    <div class="w-full max-w-md bg-white rounded-3xl shadow-xl border border-slate-100 p-8 my-auto">
+        
+        <div class="text-center mb-6">
+            <img src="https://lh3.googleusercontent.com/aida/ADBb0uiRq_CbjL-34fV1BNad2SafmDD6QgH1GI1-Gd0gd_i4v_edM3EV9xu3DMo08ipt-oH--AF--Snhuqdwxyqab_hq1bQ8YJ-LqhA8j_krwYl4OVk7cIGm-IktVFM3beiwaMePgQSOnVHRbPdG42F1qbl7zVEHBnq9F5Kx-8YlZFiIpyDJzIqrXQFZIEVMoFba0Agoouc_plYxltLWQsgVTpTbD8Ud3bGqfojl85YZhJJnyg_z3fufYjnoUq-fROplfOsxSY0P0ACT" alt="Logo" class="h-12 w-auto object-contain mx-auto mb-2" />
+            <h1 class="text-xl font-bold text-[#00317e]">Entrar no SMARTCard</h1>
+            <p class="text-xs text-slate-400">Facilitando seu embarque em Campinas</p>
+        </div>
+
+        <% if (erro) { %>
+            <div class="mb-4 bg-red-50 border-l-4 border-red-600 text-red-600 text-xs p-3 rounded-r-xl flex items-center gap-2">
+                <span class="material-symbols-outlined text-sm">error</span>
+                <span class="font-medium"><%= erro %></span>
+            </div>
+        <% } %>
+
+        <form action="/login" method="POST" class="space-y-4">
+            
+            <div>
+                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1 mb-1">E-mail</label>
+                <input type="email" name="email" placeholder="exemplo@email.com" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#0046ad] focus:border-[#0046ad] outline-none text-sm transition-all" required />
+            </div>
+
+            <div>
+                <div class="flex justify-between items-center ml-1 mb-1">
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Senha</label>
+                    <a href="#" class="text-[10px] text-[#0046ad] font-semibold hover:underline">Esqueceu?</a>
+                </div>
+                <input type="password" name="senha" placeholder="••••••••" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#0046ad] focus:border-[#0046ad] outline-none text-sm transition-all" required />
+            </div>
+
+            <button type="submit" class="w-full bg-[#0046ad] hover:bg-[#00317e] text-white py-3 rounded-xl font-bold text-sm shadow-md transition-all active:scale-[0.99] mt-4">
+                Entrar na Conta
+            </button>
+        </form>
+
+        <p class="text-center text-xs text-slate-400 mt-6">
+            Não tem uma conta? <a href="/cadastro" class="text-[#0046ad] font-bold hover:underline">Cadastre-se</a>
+        </p>
+    </div>
+
+</body>
+</html>

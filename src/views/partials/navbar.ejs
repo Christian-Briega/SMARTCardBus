@@ -1,0 +1,26 @@
+<nav class="fixed bottom-0 w-full bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 h-16 flex justify-around items-center z-50">
+    
+    <a href="/" class="flex flex-col items-center <%= activeTab === 'home' ? 'text-[#0046AD] relative' : 'text-slate-400' %> transition-all">
+        <span class="material-symbols-outlined" style='font-variation-settings: "FILL" <%= activeTab === 'home' ? "1" : "0" %>;'>home</span>
+        <span class="text-[10px] font-medium">Home</span>
+        <% if(activeTab === 'home') { %><div class="absolute -bottom-1 w-1 h-1 bg-[#0046AD] rounded-full"></div><% } %>
+    </a>
+
+    <a href="/historico" class="flex flex-col items-center <%= activeTab === 'history' ? 'text-[#0046AD] relative' : 'text-slate-400' %> transition-all">
+        <span class="material-symbols-outlined" style='font-variation-settings: "FILL" <%= activeTab === 'history' ? "1" : "0" %>;'>history</span>
+        <span class="text-[10px] font-medium">History</span>
+        <% if(activeTab === 'history') { %><div class="absolute -bottom-1 w-1 h-1 bg-[#0046AD] rounded-full"></div><% } %>
+    </a>
+
+    <a href="/carteira" class="flex flex-col items-center <%= activeTab === 'wallet' ? 'text-[#0046AD] relative' : 'text-slate-400' %> transition-all">
+        <span class="material-symbols-outlined" style='font-variation-settings: "FILL" <%= activeTab === 'wallet' ? "1" : "0" %>;'>account_balance_wallet</span>
+        <span class="text-[10px] font-medium">Wallet</span>
+        <% if(activeTab === 'wallet') { %><div class="absolute -bottom-1 w-1 h-1 bg-[#0046AD] rounded-full"></div><% } %>
+    </a>
+
+    <a href="/informacoes" class="flex flex-col items-center <%= activeTab === 'info' ? 'text-[#0046AD] relative' : 'text-slate-400' %> transition-all">
+        <span class="material-symbols-outlined" style='font-variation-settings: "FILL" <%= activeTab === 'info' ? "1" : "0" %>;'>info</span>
+        <span class="text-[10px] font-medium">Informações</span>
+        <% if(activeTab === 'info') { %><div class="absolute -bottom-1 w-1 h-1 bg-[#0046AD] rounded-full"></div><% } %>
+    </a>
+</nav>

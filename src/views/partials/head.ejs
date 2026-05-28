@@ -1,0 +1,59 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SMARTCard Bus</title>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#00317e",
+                    "primary-container": "#0046ad",
+                    "secondary-container": "#fe9400",
+                    "tertiary-container": "#2a4a8f",
+                    "background": "#f7f9fc",
+                    "on-background": "#191c1e",
+                    "outline": "#737784",
+                    "outline-variant": "#c3c6d5",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f2f4f7",
+                    "surface-container-high": "#e6e8eb",
+                    "error": "#ba1a1a"
+                },
+                spacing: {
+                    "lg": "24px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "margin-mobile": "16px",
+                    "gutter": "12px"
+                }
+            }
+        }
+    }
+</script>
+
+<style>
+    /* Correção de rolagem e fontes */
+    body { 
+        font-family: 'Public Sans', sans-serif; 
+        min-height: 100dvh;
+        background-color: #f7f9fc;
+    }
+    .material-symbols-outlined { 
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; 
+    }
+    /* Remove barra de rolagem horizontal feia nos filtros do histórico */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>

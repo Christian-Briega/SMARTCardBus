@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <%- include('partials/head') %>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+
+    <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm fixed top-0 z-50 w-full">
+        <div class="flex justify-between items-center w-full px-4 h-16">
+            <div class="flex items-center gap-4">
+                <button class="active:opacity-80 transition-all duration-200 text-slate-500">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <img src="https://lh3.googleusercontent.com/aida/ADBb0uiRq_CbjL-34fV1BNad2SafmDD6QgH1GI1-Gd0gd_i4v_edM3EV9xu3DMo08ipt-oH--AF--Snhuqdwxyqab_hq1bQ8YJ-LqhA8j_krwYl4OVk7cIGm-IktVFM3beiwaMePgQSOnVHRbPdG42F1qbl7zVEHBnq9F5Kx-8YlZFiIpyDJzIqrXQFZIEVMoFba0Agoouc_plYxltLWQsgVTpTbD8Ud3bGqfojl85YZhJJnyg_z3fufYjnoUq-fROplfOsxSY0P0ACT" alt="SMARTCard Bus Logo" class="h-10 w-auto object-contain" />
+            </div>
+            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWpry2Z2B1H2KgC8ZuAvV0beigS-zFujUqjzdG_cvvmQ-QvGA-Kl21FCi1iKk27kXy3C7d3SF6cZKsnFtH-kQfcZjy6k-FYt2--fH1mnNn7JEuzvGWce8owx1MO5F9mXtzpF95KjfjTP9JgIc8nwlq91nBl9r5uNM4brXXoDG7kY0i27HrCMrZVdeuttG5EVqKBLHC0oZn65MhHpN-7qhmUL8cZDFdT0Ou8AckGzRvvrwYxeIEYMm5DKsgzzIBrcLIoxEmqO4CueE" alt="User Profile" class="w-full h-full object-cover" />
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-24 pb-28 px-4 max-w-2xl mx-auto w-full">
+        
+        <section class="mb-lg relative overflow-hidden rounded-xl bg-primary-container p-6 text-white shadow-lg">
+            <div class="relative z-10">
+                <h2 class="font-headline-md text-headline-md mb-xs text-white">Central de Ajuda</h2>
+                <p class="font-body-sm text-body-sm opacity-90">Tudo o que você precisa saber para se locomover em Campinas com agilidade.</p>
+            </div>
+            <div class="absolute -right-8 -bottom-8 opacity-20">
+                <span class="material-symbols-outlined text-[120px]">info</span>
+            </div>
+        </section>
+
+        <section class="mb-xl">
+            <div class="flex items-center gap-2 mb-md">
+                <span class="material-symbols-outlined text-primary-container">help_center</span>
+                <h3 class="font-title-sm text-title-sm">Instruções de Uso</h3>
+            </div>
+            <div class="grid grid-cols-1 gap-gutter">
+                <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                    <div class="flex justify-between items-center">
+                        <span class="font-title-sm text-body-md font-semibold text-primary">Como recarregar meu cartão?</span>
+                        <span class="material-symbols-outlined text-outline">expand_more</span>
+                    </div>
+                </div>
+                <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                    <div class="flex justify-between items-center">
+                        <span class="font-title-sm text-body-md font-semibold text-primary">Como utilizar o QR Code no ônibus?</span>
+                        <span class="material-symbols-outlined text-outline">expand_more</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-xl">
+            <div class="flex items-center gap-2 mb-md">
+                <span class="material-symbols-outlined text-primary-container">payments</span>
+                <h3 class="font-title-sm text-title-sm">Tarifas em Campinas</h3>
+            </div>
+            <div class="flex flex-col gap-sm">
+                <div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl border-l-4 border-l-secondary-container shadow-sm">
+                    <div>
+                        <p class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Tarifa Comum</p>
+                        <p class="font-title-sm text-primary font-bold">Uso Geral</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-headline-md text-headline-md text-secondary">R$ 5,45</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl border-l-4 border-l-primary-container shadow-sm">
+                    <div>
+                        <p class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Tarifa Estudante</p>
+                        <p class="font-title-sm text-primary font-bold">Escolar & Universitário</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-headline-md text-headline-md text-secondary">R$ 2,18</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-xl">
+            <div class="flex items-center gap-2 mb-md">
+                <span class="material-symbols-outlined text-primary-container">support_agent</span>
+                <h3 class="font-title-sm text-title-sm">Canais de Atendimento</h3>
+            </div>
+            <div class="grid grid-cols-2 gap-gutter">
+                <div class="bg-white p-lg rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-sm">
+                        <span class="material-symbols-outlined text-primary-container">call</span>
+                    </div>
+                    <p class="font-title-sm text-body-sm font-bold">Telefone</p>
+                    <p class="text-[12px] text-outline">0800 771 0118</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include('partials/navbar') %>
+
+</body>
+</html>

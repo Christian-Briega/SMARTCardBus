@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body class="bg-background text-slate-900 flex flex-col min-h-screen">
+
+    <header class="bg-white px-4 h-16 flex justify-between items-center sticky top-0 z-50 border-b border-slate-100">
+        <img src="https://lh3.googleusercontent.com/aida/ADBb0uiRq_CbjL-34fV1BNad2SafmDD6QgH1GI1-Gd0gd_i4v_edM3EV9xu3DMo08ipt-oH--AF--Snhuqdwxyqab_hq1bQ8YJ-LqhA8j_krwYl4OVk7cIGm-IktVFM3beiwaMePgQSOnVHRbPdG42F1qbl7zVEHBnq9F5Kx-8YlZFiIpyDJzIqrXQFZIEVMoFba0Agoouc_plYxltLWQsgVTpTbD8Ud3bGqfojl85YZhJJnyg_z3fufYjnoUq-fROplfOsxSY0P0ACT"
+            alt="Logo" class="h-10" />
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWpry2Z2B1H2KgC8ZuAvV0beigS-zFujUqjzdG_cvvmQ-QvGA-Kl21FCi1iKk27kXy3C7d3SF6cZKsnFtH-kQfcZjy6k-FYt2--fH1mnNn7JEuzvGWce8owx1MO5F9mXtzpF95KjfjTP9JgIc8nwlq91nBl9r5uNM4brXXoDG7kY0i27HrCMrZVdeuttG5EVqKBLHC0oZn65MhHpN-7qhmUL8cZDFdT0Ou8AckGzRvvrwYxeIEYMm5DKsgzzIBrcLIoxEmqO4CueE"
+                    alt="Avatar" class="w-full h-full object-cover" />
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20 pb-24 px-4 max-w-lg mx-auto w-full">
+        <h1 class="text-2xl font-bold text-primary">
+            Olá, <%= (typeof user !=='undefined' && user) ? user.nome : 'Passageiro' %>!
+        </h1>
+
+    </main>
+
+    <%- include('partials/navbar') %>
+
+</body>
+
+</html>
