@@ -8,13 +8,59 @@
 <body class="bg-background text-slate-900 flex flex-col min-h-screen">
 
     <header class="bg-white px-4 h-16 flex justify-between items-center sticky top-0 z-50 border-b border-slate-100">
-        <img src="https://lh3.googleusercontent.com/aida/ADBb0uiRq_CbjL-34fV1BNad2SafmDD6QgH1GI1-Gd0gd_i4v_edM3EV9xu3DMo08ipt-oH--AF--Snhuqdwxyqab_hq1bQ8YJ-LqhA8j_krwYl4OVk7cIGm-IktVFM3beiwaMePgQSOnVHRbPdG42F1qbl7zVEHBnq9F5Kx-8YlZFiIpyDJzIqrXQFZIEVMoFba0Agoouc_plYxltLWQsgVTpTbD8Ud3bGqfojl85YZhJJnyg_z3fufYjnoUq-fROplfOsxSY0P0ACT"
-            alt="Logo" class="h-10" />
+        <img src="https://lh3.googleusercontent.com/aida/ADBb0uiRq_CbjL-34fV1BNad2SafmDD6QgH1GI1-Gd0gd_i4v_edM3EV9xu3DMo08ipt-oH--AF--Snhuqdwxyqab_hq1bQ8YJ-LqhA8j_krwYl4OVk7cIGm-IktVFM3beiwaMePgQSOnVHRbPdG42F1qbl7zVEHBnq9F5Kx-8YlZFiIpyDJzIqrXQFZIEVMoFba0Agoouc_plYxltLWQsgVTpTbD8Ud3bGqfojl85YZhJJnyg_z3fufYjnoUq-fROplfOsxSY0P0ACT" alt="Logo" class="h-10" />
+        
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWpry2Z2B1H2KgC8ZuAvV0beigS-zFujUqjzdG_cvvmQ-QvGA-Kl21FCi1iKk27kXy3C7d3SF6cZKsnFtH-kQfcZjy6k-FYt2--fH1mnNn7JEuzvGWce8owx1MO5F9mXtzpF95KjfjTP9JgIc8nwlq91nBl9r5uNM4brXXoDG7kY0i27HrCMrZVdeuttG5EVqKBLHC0oZn65MhHpN-7qhmUL8cZDFdT0Ou8AckGzRvvrwYxeIEYMm5DKsgzzIBrcLIoxEmqO4CueE"
-                    alt="Avatar" class="w-full h-full object-cover" />
+            
+            <div class="relative" id="profile-container">
+                
+                <button id="profile-btn" class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden focus:outline-none cursor-pointer flex items-center justify-center bg-slate-100 hover:border-primary transition-colors">
+                    <% if (typeof user !== 'undefined' && user && user.nome !== 'Passageiro') { %>
+                        <span class="font-bold text-primary text-lg"><%= user.nome.charAt(0).toUpperCase() %></span>
+                    <% } else { %>
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWpry2Z2B1H2KgC8ZuAvV0beigS-zFujUqjzdG_cvvmQ-QvGA-Kl21FCi1iKk27kXy3C7d3SF6cZKsnFtH-kQfcZjy6k-FYt2--fH1mnNn7JEuzvGWce8owx1MO5F9mXtzpF95KjfjTP9JgIc8nwlq91nBl9r5uNM4brXXoDG7kY0i27HrCMrZVdeuttG5EVqKBLHC0oZn65MhHpN-7qhmUL8cZDFdT0Ou8AckGzRvvrwYxeIEYMm5DKsgzzIBrcLIoxEmqO4CueE" alt="Avatar Padrão" class="w-full h-full object-cover" />
+                    <% } %>
+                </button>
+
+                <div id="profile-dropdown" class="hidden absolute right-0 mt-3 w-72 bg-white rounded-3xl shadow-2xl border border-slate-100 z-50 overflow-hidden">
+                    
+                    <% if (typeof user !== 'undefined' && user && user.nome !== 'Passageiro') { %>
+                        <div class="p-6 bg-slate-50 flex flex-col items-center text-center border-b border-slate-100">
+                            <div class="w-20 h-20 rounded-full bg-primary text-white flex items-center justify-center text-4xl font-bold mb-3 shadow-md">
+                                <%= user.nome.charAt(0).toUpperCase() %>
+                            </div>
+                            <p class="text-lg font-bold text-slate-800">Olá, <%= user.nome %>!</p>
+                            <p class="text-sm text-slate-500"><%= user.email %></p>
+                            <% if (user.id) { %>
+                                <div class="text-xs font-medium text-slate-400 mt-1 uppercase tracking-widest">
+                                    Card ID: <%= user.id.toString().padStart(4, '0') %>
+                                </div>
+                            <% } %>
+                        </div>
+                        <div class="p-2">
+                            <a href="/logout" class="flex items-center justify-center gap-2 w-full py-3 text-sm font-bold text-red-500 hover:bg-red-50 rounded-2xl transition-colors">
+                                <span class="material-symbols-outlined">logout</span>
+                                Sair da conta
+                            </a>
+                        </div>
+                    <% } else { %>
+                        <div class="p-6 bg-slate-50 flex flex-col items-center text-center border-b border-slate-100">
+                            <div class="w-16 h-16 rounded-full bg-slate-200 text-slate-400 flex items-center justify-center mb-3">
+                                <span class="material-symbols-outlined text-4xl">account_circle</span>
+                            </div>
+                            <p class="text-sm font-medium text-slate-600">Você não está conectado</p>
+                        </div>
+                        <div class="p-3">
+                            <a href="/login" class="flex items-center justify-center gap-2 w-full bg-primary text-white py-3 px-4 rounded-xl text-sm font-bold shadow-md hover:opacity-90 transition-all active:scale-95">
+                                <span class="material-symbols-outlined text-lg">login</span>
+                                Fazer Login / Cadastro
+                            </a>
+                        </div>
+                    <% } %>
+
+                </div>
             </div>
+
         </div>
     </header>
 
@@ -22,11 +68,27 @@
         <h1 class="text-2xl font-bold text-primary">
             Olá, <%= (typeof user !=='undefined' && user) ? user.nome : 'Passageiro' %>!
         </h1>
-
     </main>
 
     <%- include('partials/navbar') %>
 
+    <script>
+        const profileBtn = document.getElementById('profile-btn');
+        const profileDropdown = document.getElementById('profile-dropdown');
+
+        // Abre/Fecha o menu ao clicar na foto
+        profileBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            profileDropdown.classList.toggle('hidden');
+        });
+
+        // Fecha o menu se clicar fora dele
+        window.addEventListener('click', (event) => {
+            if (!profileBtn.contains(event.target) && !profileDropdown.contains(event.target)) {
+                profileDropdown.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 
 </html>
