@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SMARTCard - Carteira</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <script>
         tailwind.config = {
             theme: {
@@ -34,12 +36,13 @@
         }
     </style>
 </head>
+
 <body class="bg-slate-50 flex flex-col min-h-screen font-sans">
 
     <header class="pt-8 px-6 pb-2"></header>
 
     <main class="flex-grow container mx-auto max-w-lg px-6 mb-24">
-        
+
         <div class="bg-card-gradient p-6 rounded-2xl shadow-lg mb-8 text-white">
             <div class="flex justify-between items-start mb-4">
                 <span class="text-xs font-bold tracking-widest opacity-90 uppercase">Meu Cartão SMART</span>
@@ -47,69 +50,125 @@
             </div>
             <div class="mb-8">
                 <p class="text-sm opacity-90 mb-1">Saldo Atual</p>
-                <h2 class="text-4xl font-bold tracking-tight"><span id="saldo-atual-display"><%= user.saldo %></span> passagens</h2>
+                <h2 class="text-4xl font-bold tracking-tight"><span id="saldo-atual-display">
+                        <%= user.saldo %>
+                    </span> passagens</h2>
             </div>
             <div class="flex justify-between items-end">
-                <div class="text-sm font-medium tracking-widest opacity-90">**** **** **** <%= user.id.toString().padStart(4, '0') %></div>
-                <div class="text-sm font-bold uppercase"><%= user.nome %></div>
+                <div class="text-sm font-medium tracking-widest opacity-90">**** **** **** <%=
+                        user.id.toString().padStart(4, '0' ) %>
+                </div>
+                <div class="text-sm font-bold uppercase">
+                    <%= user.nome %>
+                </div>
             </div>
         </div>
 
-        <form action="/transferir" method="POST" class="space-y-6">
-            
-            <div class="space-y-2">
-                <label class="text-xs font-bold text-outline uppercase ml-1">Destinatário</label>
-                <div class="relative group">
-                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">person_search</span>
-                    <input type="email" name="emailDestinatario" required placeholder="ID do cartão ou e-mail" class="w-full pl-12 pr-4 py-4 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all shadow-sm" />
-                </div>
-            </div>
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xs font-bold text-outline uppercase">Meus Cartões Cadastrados</h3>
+            <a href="/cartoes/novo" class="text-xs font-bold text-primary flex items-center gap-1 hover:underline">
+                <span class="material-symbols-outlined text-sm">add_card</span> Cadastrar
+            </a>
+        </div>
 
-            <div class="space-y-2">
-                <label class="text-xs font-bold text-outline uppercase ml-1">Quantidade de Passagens</label>
-                <div class="flex items-center gap-4">
-                    <button type="button" id="btn-minus" class="w-14 h-14 bg-surface-container-high rounded-xl flex items-center justify-center text-primary-container active:scale-95 transition-transform cursor-pointer">
-                        <span class="material-symbols-outlined font-bold">remove</span>
+        <% if (typeof cartoes !=='undefined' && cartoes.length> 0) { %>
+            <div class="space-y-2 mb-6">
+                <% cartoes.forEach(cartao=> { %>
+                    <div class="p-3 bg-white border border-slate-200 rounded-xl flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 rounded-full 
+                        <%= cartao.tipo === 'Comum' ? 'bg-red-500' : '' %>
+                        <%= cartao.tipo === 'Vale-Transporte' ? 'bg-green-500' : '' %>
+                        <%= cartao.tipo === 'Escolar' ? 'bg-blue-500' : '' %>
+                        <%= cartao.tipo === 'Universitário' ? 'bg-slate-500' : '' %>">
+                            </span>
+                            <div>
+                                <p class="text-xs font-bold">
+                                    <%= cartao.tipo %> (ID: <%= cartao.id %>)
+                                </p>
+                                <p class="text-[10px] text-slate-400">Nº <%= cartao.numero_cartao %>
+                                </p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-primary">
+                            <%= cartao.saldo %> passagens
+                        </span>
+                    </div>
+                    <% }) %>
+            </div>
+            <% } %>
+
+                <form action="/transferir" method="POST" class="space-y-6">
+
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-outline uppercase ml-1">Destinatário</label>
+                        <div class="relative group">
+                            <span
+                                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">person_search</span>
+                            <input type="text" name="emailDestinatario" required placeholder="ID do cartão ou e-mail" class="w-full pl-12 pr-4 py-4 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all shadow-sm" />
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-outline uppercase ml-1">Quantidade de Passagens</label>
+                        <div class="flex items-center gap-4">
+                            <button type="button" id="btn-minus"
+                                class="w-14 h-14 bg-surface-container-high rounded-xl flex items-center justify-center text-primary-container active:scale-95 transition-transform cursor-pointer">
+                                <span class="material-symbols-outlined font-bold">remove</span>
+                            </button>
+                            <input type="number" id="input-qtd" name="quantidade" value="0" min="0"
+                                max="<%= user.saldo %>"
+                                class="flex-grow text-center py-4 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary outline-none text-2xl font-bold shadow-sm" />
+                            <button type="button" id="btn-plus"
+                                class="w-14 h-14 bg-secondary-container rounded-xl flex items-center justify-center text-white active:scale-95 transition-transform shadow-sm cursor-pointer">
+                                <span class="material-symbols-outlined font-bold">add</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-surface-container-low rounded-xl border border-outline-variant p-5 space-y-4 shadow-sm">
+                        <h3 class="text-sm font-bold text-on-surface">Resumo da Transferência</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center text-sm">
+                                <span class="text-outline">Saldo Atual</span>
+                                <span class="font-semibold text-on-surface">
+                                    <%= user.saldo %> passagens
+                                </span>
+                            </div>
+                            <div class="flex justify-between items-center text-sm">
+                                <span class="text-outline">Transferindo</span>
+                                <span class="text-error font-semibold">- <span id="resumo-transferindo">0</span>
+                                    passagens</span>
+                            </div>
+                            <div class="h-[1px] bg-outline-variant/50 my-3"></div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-bold uppercase text-outline">Saldo Após Transferência</span>
+                                <span class="text-3xl font-bold text-primary" id="resumo-final">
+                                    <%= user.saldo %>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btn-submit" disabled
+                        class="w-full bg-[#fe9400] text-white py-4 rounded-xl text-lg font-bold shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-orange-500 active:scale-[0.98] mt-4">
+                        Confirmar Transferência
                     </button>
-                    <input type="number" id="input-qtd" name="quantidade" value="0" min="0" max="<%= user.saldo %>" class="flex-grow text-center py-4 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary outline-none text-2xl font-bold shadow-sm" />
-                    <button type="button" id="btn-plus" class="w-14 h-14 bg-secondary-container rounded-xl flex items-center justify-center text-white active:scale-95 transition-transform shadow-sm cursor-pointer">
-                        <span class="material-symbols-outlined font-bold">add</span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="bg-surface-container-low rounded-xl border border-outline-variant p-5 space-y-4 shadow-sm">
-                <h3 class="text-sm font-bold text-on-surface">Resumo da Transferência</h3>
-                <div class="space-y-2">
-                    <div class="flex justify-between items-center text-sm">
-                        <span class="text-outline">Saldo Atual</span>
-                        <span class="font-semibold text-on-surface"><%= user.saldo %> passagens</span>
-                    </div>
-                    <div class="flex justify-between items-center text-sm">
-                        <span class="text-outline">Transferindo</span>
-                        <span class="text-error font-semibold">- <span id="resumo-transferindo">0</span> passagens</span>
-                    </div>
-                    <div class="h-[1px] bg-outline-variant/50 my-3"></div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs font-bold uppercase text-outline">Saldo Após Transferência</span>
-                        <span class="text-3xl font-bold text-primary" id="resumo-final"><%= user.saldo %></span>
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit" id="btn-submit" disabled class="w-full bg-[#fe9400] text-white py-4 rounded-xl text-lg font-bold shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-orange-500 active:scale-[0.98] mt-4">
-                Confirmar Transferência
-            </button>
-        </form>
+                </form>
     </main>
 
-    <nav class="fixed bottom-0 w-full bg-white border-t border-slate-200 px-6 py-3 flex justify-between items-center max-w-lg mx-auto left-0 right-0 z-50">
-        <a href="/" class="flex flex-col items-center gap-1 <%= activeTab === 'home' ? 'text-primary' : 'text-slate-400' %>">
+    <nav
+        class="fixed bottom-0 w-full bg-white border-t border-slate-200 px-6 py-3 flex justify-between items-center max-w-lg mx-auto left-0 right-0 z-50">
+        <a href="/"
+            class="flex flex-col items-center gap-1 <%= activeTab === 'home' ? 'text-primary' : 'text-slate-400' %>">
             <span class="material-symbols-outlined text-3xl">history</span>
             <span class="text-[10px] font-medium">History</span>
         </a>
-        <a href="/wallet" class="flex flex-col items-center gap-1 <%= activeTab === 'wallet' ? 'text-primary' : 'text-slate-400' %>">
-            <span class="material-symbols-outlined text-3xl" style="<%= activeTab === 'wallet' ? 'font-variation-settings: \'FILL\' 1;' : '' %>">account_balance_wallet</span>
+        <a href="/wallet"
+            class="flex flex-col items-center gap-1 <%= activeTab === 'wallet' ? 'text-primary' : 'text-slate-400' %>">
+            <span class="material-symbols-outlined text-3xl"
+                style="<%= activeTab === 'wallet' ? 'font-variation-settings: \'FILL\' 1;' : '' %>">account_balance_wallet</span>
             <span class="text-[10px] font-medium">Wallet</span>
         </a>
     </nav>
@@ -121,7 +180,7 @@
         const resumoTransferindo = document.getElementById('resumo-transferindo');
         const resumoFinal = document.getElementById('resumo-final');
         const btnSubmit = document.getElementById('btn-submit');
-        
+
         const saldoAtual = <%= user.saldo %>;
 
         function atualizarTela() {
@@ -129,7 +188,7 @@
 
             if (qtd < 0) qtd = 0;
             if (qtd > saldoAtual) qtd = saldoAtual;
-            
+
             inputQtd.value = qtd;
             resumoTransferindo.innerText = qtd;
             resumoFinal.innerText = saldoAtual - qtd;
@@ -157,4 +216,6 @@
         atualizarTela(); // Roda uma vez no início para garantir que o botão comece desabilitado
     </script>
 </body>
+
 </html>
+

@@ -1,16 +1,14 @@
-// src/config/db.js
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
+require('dotenv').config(); // Garantia extra de leitura
 
-// Criamos um pool de conexões (mais eficiente)
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',          // Substitua pelo seu usuário do MySQL Workbench
-    password: '',
-    database: 'smartcard_db',
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',          // Usa 'root' se o .env falhar
+    password: process.env.DB_PASSWORD || '',      // Insira sua senha do MySQL aqui se não usar .env
+    database: process.env.DB_NAME || 'smartcard_db',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
 });
 
-// Exportamos o pool utilizando Promises (para usar async/await)
-module.exports = pool.promise();
+module.exports = pool;

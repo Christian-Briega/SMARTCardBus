@@ -21,6 +21,11 @@ exports.buscarPorEmail = async (email) => {
     return linhas[0]; // Retorna o usuário encontrado ou undefined
 };
 
+exports.atualizarSaldo = async (usuarioId, quantidade) => {
+    const sql = 'UPDATE usuarios SET saldo = saldo + ? WHERE id = ?';
+    return await db.execute(sql, [quantidade, usuarioId]);
+};
+
 // src/models/userModel.js
 
 // ... suas outras funções (buscarPorEmail, cadastrarUsuario) ...
@@ -32,3 +37,5 @@ exports.buscarPorId = async (id) => {
     const [linhas] = await db.execute(sql, [id]);
     return linhas[0];
 };
+
+

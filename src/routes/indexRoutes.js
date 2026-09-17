@@ -1,32 +1,26 @@
-// src/routes/indexRoutes.js
 const express = require('express');
 const router = express.Router();
 
-// Importação dos controladores
 const pageController = require('../controllers/pageController');
-// src/routes/indexRoutes.js
 const authController = require('../controllers/authController');
+const walletController = require('../controllers/walletController');
 
-// ADICIONE ESTA LINHA DE TESTE AQUI:
-console.log("--- TESTE DE IMPORTAÇÃO SMARTCARD ---", authController);
-
-// Linha 10 que está quebrando:
-router.get('/cadastro', authController.renderCadastro);
-
-// Rota Principal
+// Home, Histórico e Informações
 router.get('/', pageController.renderHome);
+router.get('/historico', pageController.renderHistory);
+router.get('/informacoes', pageController.renderInfo);
 
-// Rotas de Cadastro
+// Autenticação (Cadastro e Login)
 router.get('/cadastro', authController.renderCadastro);
 router.post('/cadastro', authController.processarCadastro);
-
-// Rotas de Login
 router.get('/login', authController.renderLogin);
 router.post('/login', authController.processarLogin);
 
-// Outras Rotas do Aplicativo
-router.get('/historico', pageController.renderHistory);
-router.get('/carteira', pageController.renderWallet);
-router.get('/informacoes', pageController.renderInfo);
+// Carteira, Transferências e Cartões
+router.get('/carteira', walletController.renderWallet);
+router.get('/wallet', walletController.renderWallet);
+router.post('/transferir', walletController.processarTransferencia);
+router.get('/cartoes/novo', walletController.renderCadastrarCartao);
+router.post('/cartoes/novo', walletController.processarCadastrarCartao);
 
 module.exports = router;

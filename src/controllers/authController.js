@@ -28,12 +28,19 @@ exports.processarCadastro = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const senhaHash = await bcrypt.hash(senha, salt);
 
-        await userModel.cadastrarUsuario(nome, email, senhaHash);
+        // ATENÇÃO: Garanta que esta função existe no seu userModel.js com este mesmo nome
+        if (typeof userModel.cadastrarUsuario === 'function') {
+            await userModel.cadastrarUsuario(nome, email, senhaHash);
+        } else if (typeof userModel.cadastrar === 'function') {
+            await userModel.cadastrar(nome, email, senhaHash);
+        } else {
+            throw new Error('Função de cadastro não encontrada no userModel.js');
+        }
 
         return res.render('cadastro', { erro: null, sucesso: 'Cadastro realizado com sucesso! Faça o login.' });
     } catch (error) {
-        console.error(error);
-        return res.render('cadastro', { erro: 'Erro interno no servidor. Tente novamente.', sucesso: null });
+        console.error("ERRO NO CADASTRO:", error);
+        return res.render('cadastro', { erro: `Erro no servidor: ${error.message}`, sucesso: null });
     }
 };
 
@@ -56,25 +63,26 @@ exports.processarLogin = async (req, res) => {
             return res.render('login', { erro: 'E-mail ou senha incorretos.', sucesso: null });
         }
 
-        const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
+        // Garante suporte tanto para a coluna 'senha' quanto 'senha_hash'
+        const hashBanco = usuario.senha || usuario.senha_hash;
+        if (!hashBanco) {
+            throw new Error('Coluna de senha não encontrada no retorno do banco de dados.');
+        }
+
+        const senhaCorreta = await bcrypt.compare(senha, hashBanco);
         if (!senhaCorreta) {
-            // Corrigido de 'whitesucesso' para 'sucesso'
             return res.render('login', { erro: 'E-mail ou senha incorretos.', sucesso: null });
         }
 
-        // ==========================================
-        // NOVIDADE: Criando a sessão do usuário!
-        // ==========================================
         req.session.user = {
-            id: usuario.id, // ou id_usuario, dependendo do nome da sua coluna no banco
+            id: usuario.id || usuario.id_usuario,
             nome: usuario.nome,
             email: usuario.email
         };
 
-        // Agora sim, redireciona para a Home
         return res.redirect('/');
     } catch (error) {
-        console.error(error);
-        return res.render('login', { erro: 'Erro ao tentar fazer login.', sucesso: null });
+        console.error("ERRO NO LOGIN:", error);
+        return res.render('login', { erro: `Erro no login: ${error.message}`, sucesso: null });
     }
 };
